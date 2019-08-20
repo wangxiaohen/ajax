@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!--    <script  src="jq/jquery-3.4.1.js"></script>-->
+<!--    <script  src="jq/jquery-3.4.1.min.js"></script>-->
+    <button id="button">button</button>
+
+    <script type="text/javascript">
+       $( function (){
+           $("#button").click(function () {
+               $.ajax({
+                   type: "get",
+                   url: "https://dacall-test.oss-cn-beijing.aliyuncs.com/top250.json",
+                   dataType: "json", //预期服务器返回数据的类型
+                   success: function (data) {
+                       console.log("qqq");
+                       var aa = data.subjects;
+                       for (var i = 0; i < aa.length; i++) {
+                           var imge = document.createElement("img");
+                           imge.src = aa[i].images.small;
+                           // document.body.appendChild(img111);
+                           // document.getElementById("ide").innerHTML += img111.src + '\n';
+
+                           $("#ide").append(imge);
+                       }
+
+
+                   },
+                   error: function (XMLResponse) {//接收后端第几行错误，输出在控制台上
+                       alert("error");
+                       console.log("222")
+
+                   }
+               });
+           })
+        })
+
+    </script>
+</head>
+<body>
+<div id="ide"></div>
+</body>
+</html>
